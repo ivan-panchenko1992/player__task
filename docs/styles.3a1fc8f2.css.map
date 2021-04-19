@@ -1,0 +1,1 @@
+{"version":3,"sources":["styles.css"],"names":[],"mappings":"AAEA,KACE,yCAA8C,CAC9C,cAAe,CACf,WACF","file":"styles.3a1fc8f2.css","sourceRoot":"..\\src","sourcesContent":["/* TODO: add styles */\r\n\r\nbody {\r\n  font-family: 'Courier New', Courier, monospace;\r\n  font-size: 16px;\r\n  color: green;\r\n}"]}

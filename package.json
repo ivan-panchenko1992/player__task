@@ -1,0 +1,49 @@
+{
+  "name": "JS-template",
+  "version": "1.0.0",
+  "description": "Template for JS",
+  "main": "src/index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebuild": "rm -rf ./docs",
+    "build": "parcel build --out-dir docs --public-url ./ ./src/index.html",
+    "lint-js": "eslint ./src",
+    "lint-js:fix": "eslint ./src --fix",
+    "start": "parcel serve ./src/index.html --open",
+    "lint-styles": "stylelint **/*.css **/*.scss",
+    "lint-styles:fix": "stylelint --fix **/*.css **/*.scss",
+    "lint": "concurrently \"npm:lint-js\" \"npm:lint-styles\"",
+    "lint:fix": "concurrently \"npm:lint-js:fix\" \"npm:lint-styles:fix\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivan-panchenko1992/JS-template.git"
+  },
+  "keywords": [
+    "template",
+    "boilerplate",
+    "html",
+    "scss",
+    "javascript",
+    "parcel",
+    "eslint"
+  ],
+  "author": "ivan-panchenko1992",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivan-panchenko1992/JS-template/issues"
+  },
+  "homepage": "https://github.com/ivan-panchenko1992/JS-template#readme",
+  "devDependencies": {
+    "concurrently": "^6.0.2",
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "husky": "^6.0.0",
+    "parcel-bundler": "^1.12.5",
+    "sass": "^1.32.10",
+    "stylelint": "^13.12.0",
+    "stylelint-config-sass-guidelines": "^8.0.0"
+  },
+  "dependencies": {}
+}
