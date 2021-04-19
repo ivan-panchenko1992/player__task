@@ -1,5 +1,5 @@
 {
-  "name": "JS-template",
+  "name": "player__task",
   "version": "1.0.0",
   "description": "Template for JS",
   "main": "src/index.html",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ivan-panchenko1992/JS-template.git"
+    "url": "git+https://github.com/ivan-panchenko1992/player__task.git"
   },
   "keywords": [
     "template",
