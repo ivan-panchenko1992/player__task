@@ -13,24 +13,14 @@ async function fetching (url: string) {
   .then(result => result.all).then(result => Object.values(result))
   .then(result => result.filter(element => (element.attributes.type)))
   .then(result=> result.filter(el => el.attributes.type.textContent=== 'video/mp4'))
-  .then(result => result[0].innerHTML)
-  .then(result => container.insertAdjacentHTML('afterbegin',`<video src="${result}"></video>`))
+  .then(result => result[0].innerHTML).then(result => result.trim().slice(9, -3));
+  // .then(result => container.insertAdjacentHTML('afterbegin',`<video src="${result}"></video>`))
   return resultObj;
 }
 
 
-// async function http<T>(
-//   request: RequestInfo
-// ): Promise<T> {
-//   const response = await fetch(request);
-//   const body = await response.text();
-//   return body;
-// }
- let b:any;
- let toFetch =   fetching(vastUrl)
-//  fetch(vastUrl).then(response => response.text()).then(result => {
-//    console.log(typeof result) 
-//    a = result});
+
+ let toFetch =  fetching(vastUrl)
 
 console.log(toFetch)
 
@@ -38,6 +28,8 @@ console.log(toFetch)
 class Player {
   url: string;
   prepearedXML: any;
+  video: any;
+
  
   setVastUrl(vastUrl: string) {
     this.url = vastUrl;
@@ -48,25 +40,30 @@ class Player {
     .then(response => response.text())
     .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
     .then(result => result.all).then(result => Object.values(result))
-    .then(result => result.filter(element => (element.attributes.type)))
+    .then(result => result.filter((element: { attributes: { type: any; }; }) => (element.attributes.type)))
     .then(result=> result.filter(el => el.attributes.type.textContent=== 'video/mp4'))
+    .then(result => result[0].innerHTML).then(result => result.trim().slice(9, -3))
+    
   }
 
-  async start() {
-    let resultString: any;
-    await this.prepearedXML.then((result: { innerHTML: any; }[]) => resultString =  result[0].innerHTML)
-    container.insertAdjacentHTML('afterbegin',`<video src="${resultString} width="400" height="300"></video>`)
+  start() {
+    this.prepearedXML.then((result: string) => {
+      this.video = document.createElement('video')
+      this.video.setAttribute('src', result);
+      this.video.classList.add('video')
+      container?.append(this.video)
+    })
   }
 
   play() {
-
+    this.video.play();
   }
 
   pause() {
-
+    this.video.pause();
   }
 
   close() {
-
+    this.video.remove();
   }
 }

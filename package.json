@@ -1,7 +1,7 @@
 {
   "name": "player__task",
   "version": "1.0.0",
-  "description": "Template for JS",
+  "description": "Player",
   "main": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
