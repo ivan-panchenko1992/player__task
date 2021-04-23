@@ -1,58 +1,55 @@
-// TODO: add js;
-
-const container  = document.querySelector('#video-box')
+const container = document.querySelector('#video-box');
 const vastUrl = 'https://cdn.admixer.net/public/player%2Fregular-preroll.xml';
 
-let a:object = {};
-
-async function fetching (url: string) {
-  let resultObj: any;
-  resultObj = await fetch(url)
-  .then(response => response.text())
-  .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-  .then(result => result.all).then(result => Object.values(result))
-  .then(result => result.filter(element => (element.attributes.type)))
-  .then(result=> result.filter(el => el.attributes.type.textContent=== 'video/mp4'))
-  .then(result => result[0].innerHTML).then(result => result.trim().slice(9, -3));
-  // .then(result => container.insertAdjacentHTML('afterbegin',`<video src="${result}"></video>`))
-  return resultObj;
-}
-
-
-
- let toFetch =  fetching(vastUrl)
-
-console.log(toFetch)
-
+const loadButton = document.querySelector('#load');
+const startButton = document.querySelector('#start');
+const playButton = document.querySelector('#play');
+const pauseButton = document.querySelector('#pause');
+const closeButton = document.querySelector('#close');
 
 class Player {
-  url: string;
-  prepearedXML: any;
+  url: string = '';
+
+  prepearedUrl: any;
+
   video: any;
 
- 
-  setVastUrl(vastUrl: string) {
-    this.url = vastUrl;
+  setVastUrl(url: string) {
+    this.url = url;
   }
 
-  load(vastUrl: string) {
-    this.prepearedXML = fetch(vastUrl)
-    .then(response => response.text())
-    .then(str => (new window.DOMParser()).parseFromString(str, "text/xml"))
-    .then(result => result.all).then(result => Object.values(result))
-    .then(result => result.filter((element: { attributes: { type: any; }; }) => (element.attributes.type)))
-    .then(result=> result.filter(el => el.attributes.type.textContent=== 'video/mp4'))
-    .then(result => result[0].innerHTML).then(result => result.trim().slice(9, -3))
-    
+  load() {
+    fetch(this.url)
+      .then((response) => response.text())
+      .then((xmlText) => (new window.DOMParser())
+        .parseFromString(xmlText, 'text/xml'))
+      .then((xmlInJson) => xmlInJson.all)
+      .then((allCollection) => Object.values(allCollection))
+      .then((allCollectionInArray) => allCollectionInArray
+        .filter((element: { attributes: { type: any; }; }) => (element.attributes.type)))
+      .then((filterCollectionByEmptyType) => filterCollectionByEmptyType
+        .find((element: any) => element.attributes?.type?.textContent === 'video/mp4'))
+      .then((requiredElement) => requiredElement?.innerHTML)
+      .then((resultUrl: string | undefined) => {
+        if (!resultUrl) {
+          return new Error('ERROOORRR');
+        }
+        resultUrl.trim();
+        const startOfUrl = resultUrl.indexOf('https');
+        const endOfUrl = resultUrl.indexOf('mp4') + 3;
+        return resultUrl.slice(startOfUrl, endOfUrl);
+      })
+      .then((url) => {
+        this.prepearedUrl = url;
+      });
   }
 
   start() {
-    this.prepearedXML.then((result: string) => {
-      this.video = document.createElement('video')
-      this.video.setAttribute('src', result);
-      this.video.classList.add('video')
-      container?.append(this.video)
-    })
+    this.video = document.createElement('video');
+    this.video.setAttribute('src', this.prepearedUrl);
+    this.video.classList.add('video-container__video');
+    this.video.setAttribute('disabled', 'true');
+    container?.append(this.video);
   }
 
   play() {
@@ -67,3 +64,20 @@ class Player {
     this.video.remove();
   }
 }
+
+const player = new Player();
+
+loadButton?.addEventListener('click', () => {
+  player.setVastUrl(vastUrl);
+  player.load();
+});
+startButton?.addEventListener('click', () => {
+  player.start();
+  startButton.setAttribute('disabled', 'true');
+});
+playButton?.addEventListener('click', () => (player.play()));
+pauseButton?.addEventListener('click', () => (player.pause()));
+closeButton?.addEventListener('click', () => {
+  player.close();
+  startButton?.removeAttribute('disabled');
+});

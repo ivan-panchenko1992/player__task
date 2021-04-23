@@ -1,19 +1,26 @@
-/* TODO: add styles */
-$base-font-size: 50px;
 
 body {
   color: #fff;
   font-family: 'Courier New', Courier, monospace;
-  font-size: $base-font-size;
 }
 
-.video__container {
+.video-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__video {  
+  height: 600px;
+  width: 400px;
+  }
+}
+
+.button-container {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 50px;
 }
-
-.video {
-  width: 200px;
-  height: 200px;
+.button-gap {
+  margin: 0 20px
 }
