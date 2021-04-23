@@ -1,6 +1,6 @@
 {
   "name": "player__task",
-  "homepage": "http://ivan-panchenko1992.github.io/player__task"
+  "homepage": "http://ivan-panchenko1992.github.io/player__task",
   "version": "1.0.0",
   "description": "Player",
   "main": "src/index.html",
@@ -14,7 +14,7 @@
     "lint-styles": "stylelint **/*.css **/*.scss",
     "lint-styles:fix": "stylelint --fix **/*.css **/*.scss",
     "lint": "concurrently \"npm:lint-js\" \"npm:lint-styles\"",
-    "lint:fix": "concurrently \"npm:lint-js:fix\" \"npm:lint-styles:fix\""
+    "lint:fix": "concurrently \"npm:lint-js:fix\" \"npm:lint-styles:fix\"" 
   },
   "repository": {
     "type": "git",
@@ -34,7 +34,6 @@
   "bugs": {
     "url": "https://github.com/ivan-panchenko1992/JS-template/issues"
   },
-  "homepage": "https://github.com/ivan-panchenko1992/JS-template#readme",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
@@ -47,6 +46,7 @@
     "eslint": "^7.24.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
+    "gh-pages": "^3.1.0",
     "husky": "^6.0.0",
     "parcel-bundler": "^1.12.5",
     "sass": "^1.32.10",
