@@ -4,12 +4,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!--TODO: Add title-->
-  <title>Add document title</title>
+  <title>Player__task</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
   <link rel="stylesheet" href="./styles.scss">
-  <script src="./main.js"></script>
 </head>
 <body>
-  Template
+  <div class="button-container">
+    <button id="load" class="button button-gap">Load</button>
+    <button id="start" class="button button-gap">Start</button>
+    <button id="play" class="button button-gap">Play</button>
+    <button id="pause" class="button button-gap">Pause</button>
+    <button id="close" class="button button-gap">Close</button>
+  </div>
+  <div id="video-box" class="video-container"></div>
+<script type="text/javascript" src="./main.ts"></script>
 </body>
 </html>
