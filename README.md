@@ -18,3 +18,6 @@
 3. Play button - start the video. 
 4. Pause button - pause the video.
 5. Close button - Removes the player from the page.
+
+## Demo link
+ - [DEMO LINK](http://ivan-panchenko1992.github.io/player__task)
